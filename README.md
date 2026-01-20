@@ -7,6 +7,24 @@ Nu är det dags för att bygga en större applikation med hjälp av de tekniker 
 
 Du kommer även under arbetets gång få miniföreläsningar om hur du kan göra utvecklingen/koden snyggare, bättre och lättare att hantera. Tex att separera olika funktionalitet eller tips för att testa koden.
 
+## Specifikation
+- Valfri applikation, tex webbshop, forum, föreningssida med användare, företagssida med olika användare
+- Gör gärna en sida som kopplar samman människor eller på något sätt gör världen lite bättre ❤️
+- Individuellt projekt
+- Forka grundrepo: https://github.com/ntijoh/WSPXXV
+- Loggbok på classroom (skrivs varje tillfälle)
+- CSS är inget krav men är uppmuntrat
+- Halvtidsavstämning v.10-11 (feedback från lärare), 
+- Inlämning v.14 (Te23C) / 16(TE23B) 
+- Lämna in en film med ljud på classroom (max 5 min) där visar och förklarar applikationens funktioner
+
+## Lektionsstruktur
+- Standup meetings i början på varje lektion
+- Github: Commits under lektion och push i slutet
+- Eleven lägger inlägg i utvecklingsdagboken (classroom) i slutet av lektion
+- Vissa lektioner kommer läraren att ha en kort genomgång (gg) om lite mer avancerade saker (C/A) som man kan och bör addera till sitt projekt,
+
+
 
 
 
