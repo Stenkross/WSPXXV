@@ -1,0 +1,36 @@
+h1{
+ text-decoration: underline;
+ font-size: 30px;
+}
+
+body {
+  font-family: sans-serif;
+  color: #525252;
+  background-color: #f1f1f1;
+  font-size: x-large;
+  margin: 1em;
+}
+
+#wrapper_1{
+       display: grid;
+       grid-template-columns: 1fr 1fr 1fr;
+       grid-template-rows: 10vh auto;
+       grid-template-areas: 
+       'hd hd hd'
+       's1 p1 p1';
+       margin: 0 0px;
+   }
+
+.header {
+    grid-area: hd;
+    position: sticky;
+    z-index: 2;
+    top: 0;
+    gap: 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:#b5c194;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
