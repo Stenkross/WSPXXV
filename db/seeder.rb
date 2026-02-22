@@ -40,6 +40,13 @@ def create_tables(db)
               pwd_digest TEXT NOT NULL)')
 end
 
+def create_tables(db)
+  db.execute('CREATE TABLE pictures (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              username TEXT NOT NULL,
+              pwd_digest TEXT NOT NULL)')
+end
+
 def populate_tables(db)
   db.execute('INSERT INTO exempel (name, description, state) VALUES ("Köp mjölk", "3 liter mellanmjölk, eko",false)')
 
