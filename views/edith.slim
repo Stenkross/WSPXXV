@@ -1,0 +1,9 @@
+h2 Uppdatera din bild 
+
+form action="/PictureHold/#{@selected_pic['id']}/update" method="post"
+    label Rubrik
+    input type="text" name="name" value="#{@selected_pic['name']}"
+    p
+    label Beskrivning
+    input type="text" name="description" value="#{@selected_pic['description']}"
+    input type="submit" value="Uppdatera"

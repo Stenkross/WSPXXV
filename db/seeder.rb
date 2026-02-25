@@ -14,45 +14,32 @@ def seed!(db)
 end
 
 def drop_tables(db)
-  db.execute('DROP TABLE IF EXISTS exempel')
-end
-
-def create_tables(db)
-  db.execute('CREATE TABLE exempel (
-              id INTEGER PRIMARY KEY AUTOINCREMENT,
-              name TEXT NOT NULL, 
-              description TEXT,
-              state BOOLEAN)')
-end
-
-def create_tables(db)
-  db.execute('CREATE TABLE picture (
-              id INTEGER PRIMARY KEY AUTOINCREMENT,
-              name TEXT NOT NULL, 
-              description TEXT,
-              state INTEGER)')
-end
-
-def create_tables(db)
-  db.execute('CREATE TABLE usertabell (
-              id INTEGER PRIMARY KEY AUTOINCREMENT,
-              username TEXT NOT NULL,
-              pwd_digest TEXT NOT NULL)')
+  db.execute('DROP TABLE IF EXISTS pictures')
+  db.execute('DROP TABLE IF EXISTS usertabell')
 end
 
 def create_tables(db)
   db.execute('CREATE TABLE pictures (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
-              username TEXT NOT NULL,
+              name TEXT NOT NULL, 
+              kategori INTEGER,
+              kat_lag INTEGER,
+              user_id INTEGER,
+              location TEXT)')
+
+  db.execute('CREATE TABLE usertabell (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              username TEXT NOT NULL UNIQUE,
               pwd_digest TEXT NOT NULL)')
 end
 
-def populate_tables(db)
-  db.execute('INSERT INTO exempel (name, description, state) VALUES ("Köp mjölk", "3 liter mellanmjölk, eko",false)')
 
-  db.execute('')
+def populate_tables(db)
+  db.execute('INSERT INTO pictures (name, kategori, kat_lag, user_id, location) VALUES ("Första foto", 1, 1, 1, "Elas.jpg")')
 
   db.execute('INSERT INTO usertabell (username, pwd_digest) VALUES ("anders", "qwe123")')
+
+
 end
 
 

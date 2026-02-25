@@ -1,0 +1,13 @@
+.wraper-pic
+  - @pictures.each do |pic|
+    .pic-card
+      img src="/img/#{pic["location"]}" alt=""
+
+      .pic-inf
+        h4 = pic["name"]
+        .button-row
+          form action="/PictureHold/#{pic["id"]}/delete" method="post"
+            input type="submit" value="Ta bort"
+
+          form action="/PictureHold/#{pic["id"]}/edit" method="get"
+            input type="submit" value="Redigera"
