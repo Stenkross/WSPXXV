@@ -1,6 +1,6 @@
 .wraper-upload     
-        form action="/upload" method="post"
-                input name="Name" placeholder="Name" type="text"
+        form action="/PictureHold/upload" method="post" enctype="multipart/form-data"
+                input name="namez" placeholder="name" type="text"
                 select name="kategori" id="kategori"
                         option value="Bröllop" Bröllop
                         option value="Semester" Semester
@@ -10,5 +10,7 @@
                         option value="Privat" Privat
                         option value="Offentlig" Offentlig
 
-                input type="file" name="Picture" accept="image/png, image/jpeg"
+                input type="file" name="picture" accept="image/png, image/jpeg"
+                input type="hidden" name="user_id"
                 input type="submit" value="Ladda upp"
+

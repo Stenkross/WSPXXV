@@ -1,8 +1,7 @@
 .wraper-pic
   - @pictures.each do |pic|
     .pic-card
-      img src="/img/#{pic["location"]}" alt=""
-
+      img src="#{pic["location"]}" alt=""
       .pic-inf
         h4 = pic["name"]
         .button-row

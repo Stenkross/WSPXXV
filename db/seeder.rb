@@ -35,7 +35,8 @@ end
 
 
 def populate_tables(db)
-  db.execute('INSERT INTO pictures (name, kategori, kat_lag, user_id, location) VALUES ("Första foto", 1, 1, 1, "Elas.jpg")')
+  db.execute('INSERT INTO pictures (name, kategori, kat_lag, user_id, location) VALUES ("Första foto", 1, 1, 1, "/uploaded_pictures/Elas.jpg")')
+  db.execute('INSERT INTO pictures (name, kategori, kat_lag, user_id, location) VALUES ("Andra foto", 1, 1, 1, "/uploaded_pictures/Astronaut.jpg")')
 
   db.execute('INSERT INTO usertabell (username, pwd_digest) VALUES ("anders", "qwe123")')
 

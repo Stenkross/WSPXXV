@@ -12,7 +12,8 @@ html lang="en"
     .header-home
         h1 PictureHome
 
-        h2 Logged in as:
+        - if @user
+            h2 Logged in as: #{@user["username"]} 
 
     .sidebar 
         ul
