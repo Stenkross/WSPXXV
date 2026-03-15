@@ -8,14 +8,11 @@ require_relative './model.rb'
 enable :sessions
 
 get '/PictureHold/home' do
+  @home = true
   @pictures = db.execute("SELECT * FROM pictures")
   @user = db.execute("SELECT * FROM usertabell WHERE id=?", session[:user_id]).first
   slim(:homepage)
 end
-
-get '/' do
-  slim(/)
-end 
 
 get '/PictureHold/upload' do
   @user = db.execute("SELECT * FROM usertabell WHERE id=?", session[:user_id]).first
@@ -41,10 +38,10 @@ post '/register' do
       db.execute("INSERT INTO usertabell(username, pwd_digest) VALUES (?,?)", [username, password_digest])
       redirect('/PictureHold/home')
     else
-      redirect('/error')
+      direct('/PictureHold/account/create?error=user')
     end 
   else 
-    redirect('/error')  
+    direct('/PictureHold/account/create?error=user') 
   end 
   redirect('/PictureHold/home')
 end 
@@ -59,7 +56,7 @@ post('/login') do
   password = params["password"]
   result=db.execute("SELECT id, pwd_digest FROM usertabell WHERE username=?",username)
   if result.empty?
-    redirect('/error')
+    redirect('/PictureHold/account/login?error=user')
   end
   used_id = result.first["id"]
   pwd_digest = result.first["pwd_digest"]
@@ -67,7 +64,7 @@ post('/login') do
     session[:user_id] = used_id
     redirect('/PictureHold/home')
   else
-    redirect('/login')
+    redirect('/PictureHold/account/login?error=password') 
   end
 end
 
@@ -80,7 +77,7 @@ end
 get '/PictureHold/:id/edit' do
   @user = db.execute("SELECT * FROM usertabell WHERE id=?", session[:user_id]).first
   id = params[:id]
-  @selected_todo = db.execute("SELECT * FROM pictures WHERE id = ?", [id]).first
+  @selected_pic = db.execute("SELECT * FROM pictures WHERE id = ?", [id]).first
   slim(:edit)
 end 
 
@@ -110,4 +107,20 @@ post '/PictureHold/upload' do
   db.execute("INSERT INTO pictures (name, kategori, kat_lag, user_id, location) VALUES (?,?,?,?,?)",[up_name, up_kat, up_kat_lag, up_per,  "/uploaded_pictures/#{filename}"])
   
   redirect('/PictureHold/home')
+end
+
+get '/search' do
+  query = params[:q]
+
+  if query && !query.empty?
+    @pictures = db.execute("SELECT * FROM pictures WHERE name LIKE ?","%#{query}%")
+
+  else 
+    @pictures = db.execute("SELECT * FROM pictures")
+    
+  end
+
+  @home = true
+  @user = db.execute("SELECT * FROM usertabell WHERE id=?", session[:user_id]).first
+  slim(:homepage)
 end

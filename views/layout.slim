@@ -25,10 +25,11 @@ html lang="en"
                 a href="/PictureHold/account/login" Login
             li
                 a href="/PictureHold/account/create" Create Account
-            li 
                 hr
-                h4 Sök
-                form action="/sök" method="post"
-                input name="q" placeholder="Vilken todo" type="text"
-                input type="submit" value="sök"
+            - if @home
+                li 
+                    h4 Sök
+                    form action="/search" method="get"
+                        input name="q" placeholder="Vilken todo" type="text"
+                        input type="submit" value="sök"
     ==yield

@@ -252,3 +252,59 @@ body {
     appearance: none;
     background-size: 12px;
 }
+
+.edit-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+}
+
+.edit-box {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 350px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.edit-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.edit-box label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+.edit-box input,
+.edit-box select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.edit-box input[type="submit"] {
+    margin-top: 20px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.edit-box input[type="submit"]:hover {
+    background: #45a049;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    color: #333;
+}

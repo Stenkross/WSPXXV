@@ -1,5 +1,13 @@
+- if params[:error] == "user"
+  p Fel användarnamn
+- if params[:error] == "password"
+  p Fel lösenord
+
 .wrapper-login
     form action="/login" method="post"
+        label Användarnamn
         input name="username" placeholder="Username" type="text"
+
+        label Lösenord
         input name="password" placeholder="Password" type="password"
         input type="submit" value="Logga in"

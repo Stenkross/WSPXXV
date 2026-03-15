@@ -1,9 +1,22 @@
-h2 Uppdatera din bild 
+.edit-wrapper
+    .edit-box
+        h2 Uppdatera din bild 
 
-form action="/PictureHold/#{@selected_pic['id']}/update" method="post"
-    label Rubrik
-    input type="text" name="name" value="#{@selected_pic['name']}"
-    p
-    label Beskrivning
-    input type="text" name="description" value="#{@selected_pic['description']}"
-    input type="submit" value="Uppdatera"
+        form action="/PictureHold/#{@selected_pic['id']}/update" method="post"
+            label Rubrik
+            input type="text" name="name" value="#{@selected_pic['name']}"
+
+            label Kategori
+            select name="kategori" id="kategori"
+                option value="Bröllop" Bröllop
+                option value="Semester" Semester
+                option value="Vardag" Vardag
+
+            label Synlighet
+            select name="kat-lage" id="kat-lag"
+                option value="Privat" Privat
+                option value="Offentlig" Offentlig
+            
+            label Beskrivning
+            input type="text" name="description" value="#{@selected_pic['description']}"
+            input type="submit" value="Uppdatera"
