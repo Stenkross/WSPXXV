@@ -1,13 +1,15 @@
 .wraper-pic
-  - @pictures.each do |pic|  
-    .pic-card
-      if #{pic["@user"]} == @user
-        img src="#{pic["location"]}" alt=""
-        .pic-inf
-          h4 = pic["name"]
-          .button-row
-            form action="/PictureHold/#{pic["id"]}/delete" method="post"
-              input type="submit" value="Ta bort"
-  
-            form action="/PictureHold/#{pic["id"]}/edit" method="get"
-              input type="submit" value="Redigera"
+  - @pictures.each do |pic| 
+      .pic-card
+          img src="#{pic["location"]}" alt=""
+
+          .pic-inf
+            h4 = pic["name"]
+
+            - if @user && pic["user_id"] == @user["id"]
+              .button-row
+                form action="/PictureHold/#{pic["id"]}/delete" method="post"
+                  input type="submit" value="Ta bort"
+
+                form action="/PictureHold/#{pic["id"]}/edit" method="get"
+                  input type="submit" value="Redigera"
