@@ -84,9 +84,11 @@ end
 post '/PictureHold/:id/update' do 
   id = params[:id]
   new_name = params[:name]
-  new_desc = params[:description]
+  new_kategori = params[:kategori]
+  new_kat_lag = params[:"kat-lage"]  
 
-  db.execute("UPDATE picture SET name = ?, description = ?, WHERE id = ?", [new_name, new_desc, id])
+  db.execute("UPDATE pictures SET name = ?, kategori = ?, kat_lag = ? WHERE id = ?", [new_name, new_kategori, new_kat_lag, id])
+
   redirect('/PictureHold/home')
 end 
 
@@ -94,7 +96,7 @@ post '/PictureHold/upload' do
   up_name = params[:namez]
   up_kat= params[:kategori]
   up_kat_lag = params[:"kat-lage"]
-  up_per = params[:user_id]
+  up_per = session[:user_id]
   tempfile = params[:picture][:tempfile]
   filename = params[:picture][:filename].force_encoding("UTF-8")
 
@@ -124,3 +126,8 @@ get '/search' do
   @user = db.execute("SELECT * FROM usertabell WHERE id=?", session[:user_id]).first
   slim(:homepage)
 end
+
+get '/logout' do
+  session.clear
+  redirect '/PictureHold/account/login'
+end 

@@ -1,21 +1,24 @@
-.wraper-upload     
-        form action="/PictureHold/upload" method="post" enctype="multipart/form-data"
-                label Bildtitel 
-                input name="namez" placeholder="name" type="text"
+- if @user
+        .wraper-upload     
+                form action="/PictureHold/upload" method="post" enctype="multipart/form-data"
+                        label Bildtitel 
+                        input name="namez" placeholder="name" type="text"
 
-                label Kategori
-                select name="kategori" id="kategori"
-                        option value="Bröllop" Bröllop
-                        option value="Semester" Semester
-                        option value="Vardag" Vardag
-                
-                label Synlighet
-                select name="kat-lage" id="kat-lag"
-                        option value="Privat" Privat
-                        option value="Offentlig" Offentlig
+                        label Kategori
+                        select name="kategori" id="kategori"
+                                option value="Bröllop" Bröllop
+                                option value="Semester" Semester
+                                option value="Vardag" Vardag
 
-                label Ladda upp bild
-                input type="file" name="picture" accept="image/png, image/jpeg"
-                input type="hidden" name="user_id"
-                input type="submit" value="Ladda upp"
+                        label Synlighet
+                        select name="kat-lage" id="kat-lag"
+                                option value="Privat" Privat
+                                option value="Offentlig" Offentlig
+
+                        label Ladda upp bild
+                        input type="file" name="picture" accept="image/png, image/jpeg"
+                        input type="hidden" name="user_id"
+                        input type="submit" value="Ladda upp"
+- else 
+        h5 "Logga in för att kunna ladda upp"
 

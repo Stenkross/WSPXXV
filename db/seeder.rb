@@ -16,14 +16,15 @@ end
 def drop_tables(db)
   db.execute('DROP TABLE IF EXISTS pictures')
   db.execute('DROP TABLE IF EXISTS usertabell')
+  db.execute('DROP TABLE IF EXISTS comments')
 end
 
 def create_tables(db)
   db.execute('CREATE TABLE pictures (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
               name TEXT NOT NULL, 
-              kategori INTEGER,
-              kat_lag INTEGER,
+              kategori TEXT,
+              kat_lag TEXT,
               user_id INTEGER,
               location TEXT)')
 
@@ -31,17 +32,22 @@ def create_tables(db)
               id INTEGER PRIMARY KEY AUTOINCREMENT,
               username TEXT NOT NULL UNIQUE,
               pwd_digest TEXT NOT NULL)')
+
+  db.execute('CREATE TABLE comments (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              user_id INTEGER,
+              tag_user_id INTEGER,
+              picture_id INTEGER,
+              comments TEXT)')
 end
 
-
 def populate_tables(db)
-  db.execute('INSERT INTO pictures (name, kategori, kat_lag, user_id, location) VALUES ("Första foto", 1, 1, 1, "/uploaded_pictures/Elas.jpg")')
-  db.execute('INSERT INTO pictures (name, kategori, kat_lag, user_id, location) VALUES ("Andra foto", 1, 1, 1, "/uploaded_pictures/Astronaut.jpg")')
+  db.execute('INSERT INTO pictures (name, kategori, kat_lag, user_id, location) VALUES ("Första foto", vardag, privat, 1, "/uploaded_pictures/Elas.jpg")')
 
   db.execute('INSERT INTO usertabell (username, pwd_digest) VALUES ("anders", "qwe123")')
 
-
+  db.execute('INSERT INTO comments (user_id, picture_id, content) VALUES (1, 1, "Snygg bild jani!")')
+  db.execute('INSERT INTO comments (user_id, tag_user_id, content) VALUES (1, 1, "Bra kommentar!")')
 end
-
 
 seed!(db)

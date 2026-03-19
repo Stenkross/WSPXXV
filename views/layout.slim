@@ -32,4 +32,8 @@ html lang="en"
                     form action="/search" method="get"
                         input name="q" placeholder="Vilken todo" type="text"
                         input type="submit" value="sök"
+            - if @user
+                li
+                    form action="/logout"
+                        input type="submit" value="logga ut"
     ==yield

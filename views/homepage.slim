@@ -1,15 +1,24 @@
-.wraper-pic
-  - @pictures.each do |pic| 
-      .pic-card
-          img src="#{pic["location"]}" alt=""
+- if @user 
+   .wraper-pic
+      - @pictures.each do |pic| 
+        - if pic["kat_lag"] == "Offentlig" || pic["user_id"] == @user["id"]
+          .pic-card
+              img src="#{pic["location"]}" alt=""
 
-          .pic-inf
-            h4 = pic["name"]
+              .pic-inf
+                h4 = pic["name"]
 
-            - if @user && pic["user_id"] == @user["id"]
-              .button-row
-                form action="/PictureHold/#{pic["id"]}/delete" method="post"
-                  input type="submit" value="Ta bort"
+                - if @user && pic["user_id"] == @user["id"]
+                    .button-row
+                      form action="/PictureHold/#{pic["id"]}/delete" method="post"
+                        input type="submit" value="Ta bort"
+  
+                      form action="/PictureHold/#{pic["id"]}/edit" method="get"
+                        input type="submit" value="Redigera"
 
-                form action="/PictureHold/#{pic["id"]}/edit" method="get"
-                  input type="submit" value="Redigera"
+                details
+                  summary Kommentarer
+         
+- else
+    h5 "Logga in för att se bilder"
+  
