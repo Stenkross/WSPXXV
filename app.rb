@@ -11,6 +11,13 @@ get '/PictureHold/home' do
   @home = true
   @pictures = db.execute("SELECT * FROM pictures")
   @user = db.execute("SELECT * FROM usertabell WHERE id=?", session[:user_id]).first
+
+  @comments = db.execute(<<-SQL).group_by { |c| c["picture_id"] }
+    SELECT comments.*, usertabell.username
+    FROM comments
+    INNER JOIN usertabell ON usertabell.id = comments.user_id
+  SQL
+
   slim(:homepage)
 end
 
@@ -122,6 +129,11 @@ get '/search' do
     
   end
 
+  @comments = db.execute(<<-SQL).group_by { |c| c["picture_id"] }
+    SELECT comments.*, usertabell.username
+    FROM comments
+    INNER JOIN usertabell ON usertabell.id = comments.user_id
+  SQL
   @home = true
   @user = db.execute("SELECT * FROM usertabell WHERE id=?", session[:user_id]).first
   slim(:homepage)
@@ -131,3 +143,26 @@ get '/logout' do
   session.clear
   redirect '/PictureHold/account/login'
 end 
+
+post "/comment" do 
+  pic_id = params[:picture_id]
+  content = params[:content]
+  user_id = session[:user_id]
+
+  db.execute("INSERT INTO comments (picture_id, user_id, content) VALUES (?,?,?)", [pic_id, user_id, content])
+
+  redirect('/PictureHold/home')
+end 
+
+post "/comments" do
+  redirect "/login" unless session[:user_id]
+
+  db = SQLite3::Database.new("db/database.db")
+
+  db.execute(
+    "INSERT INTO comments (content, user_id, picture_id) VALUES (?, ?, ?)",
+    [params[:content], session[:user_id], params[:picture_id]]
+  )
+
+  redirect back
+end

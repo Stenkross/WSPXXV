@@ -33,21 +33,32 @@ def create_tables(db)
               username TEXT NOT NULL UNIQUE,
               pwd_digest TEXT NOT NULL)')
 
+  db.execute('CREATE TABLE category (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              namn TEXT)')
+
   db.execute('CREATE TABLE comments (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
               user_id INTEGER,
-              tag_user_id INTEGER,
               picture_id INTEGER,
-              comments TEXT)')
+              content TEXT)')
+  db.execute('CREATE TABLE picture_category (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              picture_id INTEGER,
+              category_id INTEGER)')
 end
 
 def populate_tables(db)
-  db.execute('INSERT INTO pictures (name, kategori, kat_lag, user_id, location) VALUES ("Första foto", vardag, privat, 1, "/uploaded_pictures/Elas.jpg")')
+  db.execute('INSERT INTO pictures (name, kategori, kat_lag, user_id, location) VALUES ("Första foto", "vardag", "privat", 2, "/uploaded_pictures/Elas.jpg")')
 
-  db.execute('INSERT INTO usertabell (username, pwd_digest) VALUES ("anders", "qwe123")')
+  db.execute('INSERT INTO usertabell (username, pwd_digest) VALUES ("Admin", "$2a$12$UrPph/r5xcr6GEm5J6RbfOqGSzLjCZkYw2glpjHFaiq/CfzboD2I6")')
 
   db.execute('INSERT INTO comments (user_id, picture_id, content) VALUES (1, 1, "Snygg bild jani!")')
-  db.execute('INSERT INTO comments (user_id, tag_user_id, content) VALUES (1, 1, "Bra kommentar!")')
+
+  db.execute('INSERT INTO pic_to_kat (namn) VALUES ("Vardag")')
+  db.execute('INSERT INTO pic_to_kat (namn) VALUES ("Bröllop")')
+  db.execute('INSERT INTO pic_to_kat (namn) VALUES ("Semester")')
+  
 end
 
 seed!(db)

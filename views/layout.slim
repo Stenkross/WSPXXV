@@ -30,7 +30,11 @@ html lang="en"
                 li 
                     h4 Sök
                     form action="/search" method="get"
-                        input name="q" placeholder="Vilken todo" type="text"
+                        input name="q" placeholder="Vilken Bild?" type="text"
+                        select name="kategori" id="kategori"
+                                option value="Vardag" Vardag
+                                option value="Semester" Semester
+                                option value="Bröllop" Bröllop
                         input type="submit" value="sök"
             - if @user
                 li

@@ -1,23 +1,38 @@
 - if @user 
    .wraper-pic
       - @pictures.each do |pic| 
-        - if pic["kat_lag"] == "Offentlig" || pic["user_id"] == @user["id"]
+        - if pic["kat_lag"] == "Offentlig" || pic["user_id"] == @user["id"] || @user == 1 
           .pic-card
               img src="#{pic["location"]}" alt=""
 
               .pic-inf
                 h4 = pic["name"]
 
-                - if @user && pic["user_id"] == @user["id"]
+                - if @user && pic["user_id"] == @user["id"] || @user == 1 
                     .button-row
                       form action="/PictureHold/#{pic["id"]}/delete" method="post"
                         input type="submit" value="Ta bort"
   
                       form action="/PictureHold/#{pic["id"]}/edit" method="get"
                         input type="submit" value="Redigera"
+                - if pic["kat_lag"] == "Offentlig"
+                  details
+                    summary Kommentarer
+                    - (@comments[pic["id"]] || []).each do |comment|
+                      
+                        p
+                          strong = comment["username"]
+                          | : #{comment["content"]}
+                          - if @user == 1 
+                            form action="/PictureHold/#{comment["id"]}/delete" method="post"
+                             input type="submit" value="Ta bort"
 
-                details
-                  summary Kommentarer
+                    form action="/comment" method="post"
+                      input type="hidden" name="picture_id" value="#{pic["id"]}"
+                      textarea name="content" placeholder="Skriv en kommentar"
+                      br
+                      button type="submit" Kommentera
+                   
          
 - else
     h5 "Logga in för att se bilder"
