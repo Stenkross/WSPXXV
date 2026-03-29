@@ -4,11 +4,25 @@
                         label Bildtitel 
                         input name="namez" placeholder="name" type="text"
 
-                        label Kategori
-                        select name="kategori" id="kategori"
-                                option value="Vardag" Vardag
-                                option value="Semester" Semester
-                                option value="Bröllop" Bröllop
+                        label Ladda upp bild
+                        input type="file" name="picture" accept="image/png, image/jpeg"
+                        
+                       
+                            label
+                              input type="checkbox" name="categories[]" value="Vardag"
+                              | Vardag
+                    
+                            label
+                              input type="checkbox" name="categories[]" value="Semester"
+                              | Semester
+                    
+                            label
+                              input type="checkbox" name="categories[]" value="Bröllop"
+                              | Bröllop
+                    
+                            label
+                              input type="checkbox" name="categories[]" value="Natur"
+                              | Natur
 
                         label Synlighet
                         select name="kat-lage" id="kat-lag"
@@ -16,8 +30,6 @@
                                 option value="Privat" Privat
                                 
 
-                        label Ladda upp bild
-                        input type="file" name="picture" accept="image/png, image/jpeg"
                         input type="hidden" name="user_id"
                         input type="submit" value="Ladda upp"
 - else 

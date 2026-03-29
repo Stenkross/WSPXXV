@@ -7,10 +7,21 @@
             input type="text" name="name" value="#{@selected_pic['name']}"
 
             label Kategori
-            select name="kategori" id="kategori"
-                option value="Vardag" Vardag
-                option value="Semester" Semester
-                option value="Bröllop" Bröllop
+                label
+                    input type="checkbox" name="categories[]" value="Vardag"
+                    | Vardag
+            
+                label
+                    input type="checkbox" name="categories[]" value="Semester"
+                    | Semester
+            
+                label
+                    input type="checkbox" name="categories[]" value="Bröllop"
+                    | Bröllop
+            
+                label
+                    input type="checkbox" name="categories[]" value="Natur"
+                    | Natur
 
             label Synlighet
             select name="kat-lage" id="kat-lag"

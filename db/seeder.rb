@@ -17,13 +17,14 @@ def drop_tables(db)
   db.execute('DROP TABLE IF EXISTS pictures')
   db.execute('DROP TABLE IF EXISTS usertabell')
   db.execute('DROP TABLE IF EXISTS comments')
+  db.execute('DROP TABLE IF EXISTS category')
+  db.execute('DROP TABLE IF EXISTS picture_category')
 end
 
 def create_tables(db)
   db.execute('CREATE TABLE pictures (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
               name TEXT NOT NULL, 
-              kategori TEXT,
               kat_lag TEXT,
               user_id INTEGER,
               location TEXT)')
@@ -42,6 +43,7 @@ def create_tables(db)
               user_id INTEGER,
               picture_id INTEGER,
               content TEXT)')
+
   db.execute('CREATE TABLE picture_category (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
               picture_id INTEGER,
@@ -49,15 +51,23 @@ def create_tables(db)
 end
 
 def populate_tables(db)
-  db.execute('INSERT INTO pictures (name, kategori, kat_lag, user_id, location) VALUES ("Första foto", "vardag", "privat", 2, "/uploaded_pictures/Elas.jpg")')
+  db.execute('INSERT INTO pictures (name, kat_lag, user_id, location) VALUES ("Första foto", "Offentlig", 1, "/uploaded_pictures/17656885_orig.jpg")')
+  db.execute('INSERT INTO pictures (name, kat_lag, user_id, location) VALUES ("Andra foto", "Offentlig", 1, "/uploaded_pictures/20231211_123300.jpg")')
+  db.execute('INSERT INTO pictures (name, kat_lag, user_id, location) VALUES ("Tredje foto", "Offentlig", 1, "/uploaded_pictures/20240124_121326.jpg")')
+  db.execute('INSERT INTO pictures (name, kat_lag, user_id, location) VALUES ("Fjärde foto", "Offentlig", 1, "/uploaded_pictures/Arabian-dromedary-camel-calf.png")')
 
   db.execute('INSERT INTO usertabell (username, pwd_digest) VALUES ("Admin", "$2a$12$UrPph/r5xcr6GEm5J6RbfOqGSzLjCZkYw2glpjHFaiq/CfzboD2I6")')
 
   db.execute('INSERT INTO comments (user_id, picture_id, content) VALUES (1, 1, "Snygg bild jani!")')
 
-  db.execute('INSERT INTO pic_to_kat (namn) VALUES ("Vardag")')
-  db.execute('INSERT INTO pic_to_kat (namn) VALUES ("Bröllop")')
-  db.execute('INSERT INTO pic_to_kat (namn) VALUES ("Semester")')
+  db.execute('INSERT INTO category (namn) VALUES ("Vardag")')
+  db.execute('INSERT INTO category (namn) VALUES ("Bröllop")')
+  db.execute('INSERT INTO category (namn) VALUES ("Semester")')
+  db.execute('INSERT INTO category (namn) VALUES ("Natur")')
+
+  db.execute('INSERT INTO picture_category (picture_id, category_id) VALUES (1, 1)')
+  db.execute('INSERT INTO picture_category (picture_id, category_id) VALUES (1, 2)')
+  db.execute('INSERT INTO picture_category (picture_id, category_id) VALUES (2, 1)')
   
 end
 

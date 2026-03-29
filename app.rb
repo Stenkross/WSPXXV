@@ -7,6 +7,18 @@ require_relative './model.rb'
 
 enable :sessions
 
+before do
+  if session[:user_id]
+    @user = db.execute("SELECT * FROM usertabell WHERE id=?", session[:user_id]).first
+  else
+    @user = nil
+  end
+end
+
+def re_login
+  halt redirect('/PictureHold/account/login') unless @user
+end
+
 get '/PictureHold/home' do
   @home = true
   @pictures = db.execute("SELECT * FROM pictures")
@@ -22,6 +34,7 @@ get '/PictureHold/home' do
 end
 
 get '/PictureHold/upload' do
+  re_login
   @user = db.execute("SELECT * FROM usertabell WHERE id=?", session[:user_id]).first
   slim(:upload)
 end 
@@ -76,13 +89,18 @@ post('/login') do
 end
 
 post '/PictureHold/:id/delete' do
+  re_login
   id = params[:id]
+  picture = db.execute("SELECT * FROM pictures WHERE id=?", [id]).first
+
+  halt "No access" unless picture["user_id"] == @user["id"]
   db.execute("DELETE from pictures WHERE id=?", [id])
   redirect('/PictureHold/home')
-end 
+end
 
 get '/PictureHold/:id/edit' do
   @user = db.execute("SELECT * FROM usertabell WHERE id=?", session[:user_id]).first
+  halt "No access" unless @selected_pic["user_id"] == @user["id"]
   id = params[:id]
   @selected_pic = db.execute("SELECT * FROM pictures WHERE id = ?", [id]).first
   slim(:edit)
@@ -93,6 +111,8 @@ post '/PictureHold/:id/update' do
   new_name = params[:name]
   new_kategori = params[:kategori]
   new_kat_lag = params[:"kat-lage"]  
+  pic = db.execute("SELECT * FROM pictures WHERE id=?", [id]).first
+  halt "No access" unless pic["user_id"] == @user["id"]
 
   db.execute("UPDATE pictures SET name = ?, kategori = ?, kat_lag = ? WHERE id = ?", [new_name, new_kategori, new_kat_lag, id])
 
@@ -119,23 +139,35 @@ post '/PictureHold/upload' do
 end
 
 get '/search' do
-  query = params[:q]
+  query = params[:q] || ""
+  category = params[:kategori] || ""
 
-  if query && !query.empty?
-    @pictures = db.execute("SELECT * FROM pictures WHERE name LIKE ?","%#{query}%")
+  sql = "
+    SELECT DISTINCT pictures.*
+    FROM pictures
+    LEFT JOIN picture_category ON pictures.id = picture_category.picture_id
+    LEFT JOIN category ON category.id = picture_category.category_id
+    WHERE pictures.name LIKE ?
+  "
 
-  else 
-    @pictures = db.execute("SELECT * FROM pictures")
-    
+  values = ["%#{query}%"]
+
+  if category != ""
+    sql += " AND category.namn = ?"
+    values << category
   end
+
+  @pictures = db.execute(sql, values)
 
   @comments = db.execute(<<-SQL).group_by { |c| c["picture_id"] }
     SELECT comments.*, usertabell.username
     FROM comments
     INNER JOIN usertabell ON usertabell.id = comments.user_id
   SQL
-  @home = true
+
   @user = db.execute("SELECT * FROM usertabell WHERE id=?", session[:user_id]).first
+
+  @home = true
   slim(:homepage)
 end
 
@@ -145,24 +177,13 @@ get '/logout' do
 end 
 
 post "/comment" do 
+  re_login
   pic_id = params[:picture_id]
   content = params[:content]
   user_id = session[:user_id]
+  halt "Empty comment" if params[:content].to_s.strip == ""
 
   db.execute("INSERT INTO comments (picture_id, user_id, content) VALUES (?,?,?)", [pic_id, user_id, content])
 
   redirect('/PictureHold/home')
 end 
-
-post "/comments" do
-  redirect "/login" unless session[:user_id]
-
-  db = SQLite3::Database.new("db/database.db")
-
-  db.execute(
-    "INSERT INTO comments (content, user_id, picture_id) VALUES (?, ?, ?)",
-    [params[:content], session[:user_id], params[:picture_id]]
-  )
-
-  redirect back
-end

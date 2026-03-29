@@ -32,9 +32,11 @@ html lang="en"
                     form action="/search" method="get"
                         input name="q" placeholder="Vilken Bild?" type="text"
                         select name="kategori" id="kategori"
+                                option value="" Alla
                                 option value="Vardag" Vardag
                                 option value="Semester" Semester
                                 option value="Bröllop" Bröllop
+                                option value="Natur" Natur
                         input type="submit" value="sök"
             - if @user
                 li
