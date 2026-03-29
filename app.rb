@@ -112,30 +112,47 @@ get '/PictureHold/:id/edit' do
   slim(:edit)
 end 
 
-post '/PictureHold/:id/update' do 
-  id = params[:id]
-  new_name = params[:name]
-  new_kategori = params[:kategori]
-  new_kat_lag = params[:"kat-lage"]  
-  pic = db.execute("SELECT * FROM pictures WHERE id=?", [id]).first
+post '/PictureHold/:id/update' do
+  re_login
+  
+  pic_id = params[:id]
+  new_name = params[:namez]
+  new_kat_lag = params[:"kat-lage"]
+  
+  new_categories = params["categories"] || []
 
-   if @user["id"] != 1
-    halt "No access" unless pic["user_id"] == @user["id"]
+  db.execute("UPDATE pictures SET name = ?, kat_lag = ? WHERE id = ?", [new_name, new_kat_lag, pic_id])
+
+  db.execute("DELETE FROM picture_category WHERE picture_id = ?", pic_id)
+
+  new_categories.each do |cat|
+    result = db.execute("SELECT id FROM category WHERE namn=?", cat)
+
+    if result.empty?
+      db.execute("INSERT INTO category (namn) VALUES (?)", cat)
+      cat_id = db.last_insert_row_id
+    else
+      cat_id = result.first["id"]
+    end
+
+   
+    db.execute("INSERT INTO picture_category (picture_id, category_id) VALUES (?,?)", [pic_id, cat_id])
   end
 
-  db.execute("UPDATE pictures SET name = ?, kategori = ?, kat_lag = ? WHERE id = ?", [new_name, new_kategori, new_kat_lag, id])
-
   redirect('/PictureHold/home')
-end 
+end
 
 post '/PictureHold/upload' do
   re_login
   halt "Tomt namn" if params[:namez].to_s.strip == ""
   halt "Ingen bild vald" unless params[:picture]
+  
   up_name = params[:namez]
-  up_kat= params[:kategori]
   up_kat_lag = params[:"kat-lage"]
-  up_per = session[:user_id]
+  
+  # Här fångar vi din array från Slim-formulärets checkboxes perfekt!
+  categories = params["categories"] || []
+
   tempfile = params[:picture][:tempfile]
   filename = params[:picture][:filename].force_encoding("UTF-8")
 
@@ -145,8 +162,23 @@ post '/PictureHold/upload' do
     f.write(tempfile.read)
   end
 
-  db.execute("INSERT INTO pictures (name, kategori, kat_lag, user_id, location) VALUES (?,?,?,?,?)",[up_name, up_kat, up_kat_lag, up_per,  "/uploaded_pictures/#{filename}"])
+  db.execute("INSERT INTO pictures (name, kat_lag, user_id, location) VALUES (?,?,?,?)",[up_name, up_kat_lag, session[:user_id], "/uploaded_pictures/#{filename}"])
   
+  pic_id = db.last_insert_row_id
+
+  categories.each do |cat|
+    result = db.execute("SELECT id FROM category WHERE namn=?", cat)
+
+    if result.empty?
+      db.execute("INSERT INTO category (namn) VALUES (?)", cat)
+      cat_id = db.last_insert_row_id
+    else
+      cat_id = result.first["id"]
+    end
+
+    db.execute("INSERT INTO picture_category (picture_id, category_id) VALUES (?,?)", [pic_id, cat_id])
+  end
+
   redirect('/PictureHold/home')
 end
 
@@ -165,8 +197,16 @@ get '/search' do
   values = ["%#{query}%"]
 
   if category != ""
-    sql += " AND category.namn = ?"
-    values << category
+    sql = "
+      SELECT DISTINCT pictures.*
+      FROM pictures
+      INNER JOIN picture_category ON pictures.id = picture_category.picture_id
+      INNER JOIN category ON category.id = picture_category.category_id
+      WHERE pictures.name LIKE ?
+      AND category.namn = ?
+    "
+
+    values = ["%#{query}%", category]
   end
 
   @pictures = db.execute(sql, values)
