@@ -49,19 +49,22 @@ post '/register' do
   password = params["password"]
   password_confirm = params["confirm_password"]
 
+  halt "Tomma fält" if username.to_s.strip == "" || password.to_s.strip == ""
+
   result = db.execute("SELECT id FROM usertabell WHERE username=?", username)
 
+  
+  
   if result.empty?
     if password == password_confirm
       password_digest = BCrypt::Password.create(password)
-      p password_digest
       db.execute("INSERT INTO usertabell(username, pwd_digest) VALUES (?,?)", [username, password_digest])
       redirect('/PictureHold/home')
     else
-      direct('/PictureHold/account/create?error=user')
+      halt "Lösenorden matchar inte" unless password == password_confirm
     end 
   else 
-    direct('/PictureHold/account/create?error=user') 
+    halt "Användarnamn finns redan"
   end 
   redirect('/PictureHold/home')
 end 
@@ -74,17 +77,16 @@ end
 post('/login') do
   username = params["username"]
   password = params["password"]
-  result=db.execute("SELECT id, pwd_digest FROM usertabell WHERE username=?",username)
-  if result.empty?
-    redirect('/PictureHold/account/login?error=user')
-  end
+
+  result = db.execute("SELECT id, pwd_digest FROM usertabell WHERE username=?",username)
+
   used_id = result.first["id"]
   pwd_digest = result.first["pwd_digest"]
   if BCrypt::Password.new(pwd_digest) == password
     session[:user_id] = used_id
     redirect('/PictureHold/home')
   else
-    redirect('/PictureHold/account/login?error=password') 
+    halt "Fel användarnamn eller lösenord"
   end
 end
 
@@ -93,14 +95,18 @@ post '/PictureHold/:id/delete' do
   id = params[:id]
   picture = db.execute("SELECT * FROM pictures WHERE id=?", [id]).first
 
-  halt "No access" unless picture["user_id"] == @user["id"]
+  if @user["id"] != 1
+    halt "No access" unless picture["user_id"] == @user["id"]
+  end
   db.execute("DELETE from pictures WHERE id=?", [id])
   redirect('/PictureHold/home')
 end
 
 get '/PictureHold/:id/edit' do
   @user = db.execute("SELECT * FROM usertabell WHERE id=?", session[:user_id]).first
-  halt "No access" unless @selected_pic["user_id"] == @user["id"]
+  if @user["id"] != 1
+    halt "No access" unless @selected_pic["user_id"] == @user["id"]
+  end
   id = params[:id]
   @selected_pic = db.execute("SELECT * FROM pictures WHERE id = ?", [id]).first
   slim(:edit)
@@ -112,7 +118,10 @@ post '/PictureHold/:id/update' do
   new_kategori = params[:kategori]
   new_kat_lag = params[:"kat-lage"]  
   pic = db.execute("SELECT * FROM pictures WHERE id=?", [id]).first
-  halt "No access" unless pic["user_id"] == @user["id"]
+
+   if @user["id"] != 1
+    halt "No access" unless pic["user_id"] == @user["id"]
+  end
 
   db.execute("UPDATE pictures SET name = ?, kategori = ?, kat_lag = ? WHERE id = ?", [new_name, new_kategori, new_kat_lag, id])
 
@@ -120,6 +129,9 @@ post '/PictureHold/:id/update' do
 end 
 
 post '/PictureHold/upload' do
+  re_login
+  halt "Tomt namn" if params[:namez].to_s.strip == ""
+  halt "Ingen bild vald" unless params[:picture]
   up_name = params[:namez]
   up_kat= params[:kategori]
   up_kat_lag = params[:"kat-lage"]

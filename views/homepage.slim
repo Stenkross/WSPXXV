@@ -1,14 +1,14 @@
 - if @user 
    .wraper-pic
       - @pictures.each do |pic| 
-        - if pic["kat_lag"] == "Offentlig" || pic["user_id"] == @user["id"] || @user == 1 
+        - if pic["kat_lag"] == "Offentlig" || pic["user_id"] == @user["id"] || @user["id"] == 1 
           .pic-card
               img src="#{pic["location"]}" alt=""
 
               .pic-inf
                 h4 = pic["name"]
 
-                - if @user && pic["user_id"] == @user["id"] || @user == 1 
+                - if @user && pic["user_id"] == @user["id"] || @user["id"] == 1
                     .button-row
                       form action="/PictureHold/#{pic["id"]}/delete" method="post"
                         input type="submit" value="Ta bort"
@@ -23,8 +23,8 @@
                         p
                           strong = comment["username"]
                           | : #{comment["content"]}
-                          - if @user == 1 
-                            form action="/PictureHold/#{comment["id"]}/delete" method="post"
+                          - if @user && @user["id"] == 1
+                            form action="/PictureHold/#{comment["id"]}/delete_com" method="post"
                              input type="submit" value="Ta bort"
 
                     form action="/comment" method="post"
