@@ -79,6 +79,7 @@ post('/login') do
   password = params["password"]
 
   result = db.execute("SELECT id, pwd_digest FROM usertabell WHERE username=?",username)
+  halt "Fel användarnamn eller lösenord" if result.empty?
 
   used_id = result.first["id"]
   pwd_digest = result.first["pwd_digest"]
@@ -99,6 +100,17 @@ post '/PictureHold/:id/delete' do
     halt "No access" unless picture["user_id"] == @user["id"]
   end
   db.execute("DELETE from pictures WHERE id=?", [id])
+  redirect('/PictureHold/home')
+end
+
+post '/PictureHold/:id/delete_com' do
+  id = params[:id]
+  picture = db.execute("SELECT * FROM comments WHERE id=?", [id]).first
+
+  if @user["id"] != 1
+    halt "No access"
+  end
+  db.execute("DELETE from comments WHERE id=?", [id])
   redirect('/PictureHold/home')
 end
 
@@ -150,7 +162,6 @@ post '/PictureHold/upload' do
   up_name = params[:namez]
   up_kat_lag = params[:"kat-lage"]
   
-  # Här fångar vi din array från Slim-formulärets checkboxes perfekt!
   categories = params["categories"] || []
 
   tempfile = params[:picture][:tempfile]

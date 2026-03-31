@@ -6,7 +6,7 @@
             label Rubrik
             input type="text" name="name" value="#{@selected_pic['name']}"
 
-            label Kategori
+                label Kategori
                 label
                     input type="checkbox" name="categories[]" value="Vardag"
                     | Vardag
@@ -27,7 +27,5 @@
             select name="kat-lage" id="kat-lag"
                 option value="Offentlig" Offentlig
                 option value="Privat" Privat
-            
-            label Beskrivning
-            input type="text" name="description" value="#{@selected_pic['description']}"
+        
             input type="submit" value="Uppdatera"
