@@ -27,13 +27,14 @@ def create_tables(db)
               name TEXT NOT NULL, 
               kat_lag TEXT,
               user_id INTEGER,
-              location TEXT)')
+              location TEXT,
+              )')
 
   db.execute('CREATE TABLE usertabell (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
               username TEXT NOT NULL UNIQUE,
-              pwd_digest TEXT NOT NULL, 
-              last_login)')
+              pwd_digest TEXT NOT NULL,
+              login_attempt text)')
 
   db.execute('CREATE TABLE category (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -43,7 +44,8 @@ def create_tables(db)
               id INTEGER PRIMARY KEY AUTOINCREMENT,
               user_id INTEGER,
               picture_id INTEGER,
-              content TEXT)')
+              content TEXT,
+              FOREIGN KEY("picture_id") REFERENCES "pictures"("id") ON DELETE CASCADE)')
 
   db.execute('CREATE TABLE picture_category (
               id INTEGER PRIMARY KEY AUTOINCREMENT,

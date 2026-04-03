@@ -9,11 +9,17 @@ enable :sessions
 
 before do
   if session[:user_id]
-    @user = db.execute("SELECT * FROM usertabell WHERE id=?", session[:user_id]).first
+    @user = get_user_id(session[:user_id])
   else
     @user = nil
   end
 end
+
+#before do
+#  if session[:login_attempt] == nil
+#    session[:login_attempt] = []
+#  end 
+#end 
 
 def re_login
   halt redirect('/PictureHold/account/login') unless @user
@@ -21,28 +27,51 @@ end
 
 get '/PictureHold/home' do
   @home = true
-  @pictures = db.execute("SELECT * FROM pictures")
-  @user = db.execute("SELECT * FROM usertabell WHERE id=?", session[:user_id]).first
-
-  @comments = db.execute(<<-SQL).group_by { |c| c["picture_id"] }
-    SELECT comments.*, usertabell.username
-    FROM comments
-    INNER JOIN usertabell ON usertabell.id = comments.user_id
-  SQL
-
+  @pictures = get_all_pics
+  @comments = groupe_comments
   slim(:homepage)
 end
 
 get '/PictureHold/upload' do
   re_login
-  @user = db.execute("SELECT * FROM usertabell WHERE id=?", session[:user_id]).first
   slim(:upload)
 end 
 
 get '/PictureHold/account/create' do
-  @user = db.execute("SELECT * FROM usertabell WHERE id=?", session[:user_id]).first
   slim(:create)
 end
+
+get '/PictureHold/account/login' do
+  slim(:login)
+end 
+
+get '/PictureHold/:id/edit' do
+  id = params[:id]
+  @selected_pic = get_pic_id(id)
+
+  if @user["id"] != 1
+    halt "No access" unless @selected_pic["user_id"] == @user["id"]
+  end
+ 
+  slim(:edit)
+end 
+
+get '/search' do
+  query = params[:q] || ""
+  category = params[:kategori] || ""
+
+  @pictures = search_pic(query, category)
+
+  @comments = groupe_comments
+
+  @home = true
+  slim(:homepage)
+end
+
+get '/logout' do
+  session.clear
+  redirect '/PictureHold/account/login'
+end 
 
 post '/register' do
   username = params["username"]
@@ -50,41 +79,28 @@ post '/register' do
   password_confirm = params["confirm_password"]
 
   halt "Tomma fält" if username.to_s.strip == "" || password.to_s.strip == ""
-
-  result = db.execute("SELECT id FROM usertabell WHERE username=?", username)
-
   
-  
-  if result.empty?
+  if !user_exist_already(username)
     if password == password_confirm
-      password_digest = BCrypt::Password.create(password)
-      db.execute("INSERT INTO usertabell(username, pwd_digest) VALUES (?,?)", [username, password_digest])
+      create_user(username, password)
       redirect('/PictureHold/home')
     else
-      halt "Lösenorden matchar inte" unless password == password_confirm
+      halt "Lösenorden matchar inte"
     end 
   else 
     halt "Användarnamn finns redan"
-  end 
+  end
   redirect('/PictureHold/home')
 end 
 
-get '/PictureHold/account/login' do
-  @user = db.execute("SELECT * FROM usertabell WHERE id=?", session[:user_id]).first
-  slim(:login)
-end 
-
-post('/login') do
+post '/login' do
   username = params["username"]
   password = params["password"]
 
-  result = db.execute("SELECT id, pwd_digest FROM usertabell WHERE username=?",username)
-  halt "Fel användarnamn eller lösenord" if result.empty?
+  user_id = authenticate(username, password)
 
-  used_id = result.first["id"]
-  pwd_digest = result.first["pwd_digest"]
-  if BCrypt::Password.new(pwd_digest) == password
-    session[:user_id] = used_id
+  if user_id
+    session[:user_id] = user_id
     redirect('/PictureHold/home')
   else
     halt "Fel användarnamn eller lösenord"
@@ -94,35 +110,23 @@ end
 post '/PictureHold/:id/delete' do
   re_login
   id = params[:id]
-  picture = db.execute("SELECT * FROM pictures WHERE id=?", [id]).first
+  picture = get_pic_id(id)
 
   if @user["id"] != 1
     halt "No access" unless picture["user_id"] == @user["id"]
   end
-  db.execute("DELETE from pictures WHERE id=?", [id])
+  delete_picture(id)
   redirect('/PictureHold/home')
 end
 
 post '/PictureHold/:id/delete_com' do
-  id = params[:id]
-  picture = db.execute("SELECT * FROM comments WHERE id=?", [id]).first
-
   if @user["id"] != 1
     halt "No access"
   end
-  db.execute("DELETE from comments WHERE id=?", [id])
+  
+  delete_comment(params[:id])
   redirect('/PictureHold/home')
 end
-
-get '/PictureHold/:id/edit' do
-  @user = db.execute("SELECT * FROM usertabell WHERE id=?", session[:user_id]).first
-  if @user["id"] != 1
-    halt "No access" unless @selected_pic["user_id"] == @user["id"]
-  end
-  id = params[:id]
-  @selected_pic = db.execute("SELECT * FROM pictures WHERE id = ?", [id]).first
-  slim(:edit)
-end 
 
 post '/PictureHold/:id/update' do
   re_login
@@ -133,24 +137,8 @@ post '/PictureHold/:id/update' do
   
   new_categories = params["categories"] || []
 
-  db.execute("UPDATE pictures SET name = ?, kat_lag = ? WHERE id = ?", [new_name, new_kat_lag, pic_id])
-
-  db.execute("DELETE FROM picture_category WHERE picture_id = ?", pic_id)
-
-  new_categories.each do |cat|
-    result = db.execute("SELECT id FROM category WHERE namn=?", cat)
-
-    if result.empty?
-      db.execute("INSERT INTO category (namn) VALUES (?)", cat)
-      cat_id = db.last_insert_row_id
-    else
-      cat_id = result.first["id"]
-    end
-
-   
-    db.execute("INSERT INTO picture_category (picture_id, category_id) VALUES (?,?)", [pic_id, cat_id])
-  end
-
+  update_picture(pic_id, new_name, new_kat_lag, new_categories)
+  
   redirect('/PictureHold/home')
 end
 
@@ -161,7 +149,7 @@ post '/PictureHold/upload' do
   
   up_name = params[:namez]
   up_kat_lag = params[:"kat-lage"]
-  
+  user_id = session[:user_id]
   categories = params["categories"] || []
 
   tempfile = params[:picture][:tempfile]
@@ -173,71 +161,9 @@ post '/PictureHold/upload' do
     f.write(tempfile.read)
   end
 
-  db.execute("INSERT INTO pictures (name, kat_lag, user_id, location) VALUES (?,?,?,?)",[up_name, up_kat_lag, session[:user_id], "/uploaded_pictures/#{filename}"])
-  
-  pic_id = db.last_insert_row_id
-
-  categories.each do |cat|
-    result = db.execute("SELECT id FROM category WHERE namn=?", cat)
-
-    if result.empty?
-      db.execute("INSERT INTO category (namn) VALUES (?)", cat)
-      cat_id = db.last_insert_row_id
-    else
-      cat_id = result.first["id"]
-    end
-
-    db.execute("INSERT INTO picture_category (picture_id, category_id) VALUES (?,?)", [pic_id, cat_id])
-  end
-
+  create_picture(up_name, up_kat_lag, user_id, filename, categories)
   redirect('/PictureHold/home')
 end
-
-get '/search' do
-  query = params[:q] || ""
-  category = params[:kategori] || ""
-
-  sql = "
-    SELECT DISTINCT pictures.*
-    FROM pictures
-    LEFT JOIN picture_category ON pictures.id = picture_category.picture_id
-    LEFT JOIN category ON category.id = picture_category.category_id
-    WHERE pictures.name LIKE ?
-  "
-
-  values = ["%#{query}%"]
-
-  if category != ""
-    sql = "
-      SELECT DISTINCT pictures.*
-      FROM pictures
-      INNER JOIN picture_category ON pictures.id = picture_category.picture_id
-      INNER JOIN category ON category.id = picture_category.category_id
-      WHERE pictures.name LIKE ?
-      AND category.namn = ?
-    "
-
-    values = ["%#{query}%", category]
-  end
-
-  @pictures = db.execute(sql, values)
-
-  @comments = db.execute(<<-SQL).group_by { |c| c["picture_id"] }
-    SELECT comments.*, usertabell.username
-    FROM comments
-    INNER JOIN usertabell ON usertabell.id = comments.user_id
-  SQL
-
-  @user = db.execute("SELECT * FROM usertabell WHERE id=?", session[:user_id]).first
-
-  @home = true
-  slim(:homepage)
-end
-
-get '/logout' do
-  session.clear
-  redirect '/PictureHold/account/login'
-end 
 
 post "/comment" do 
   re_login
@@ -246,7 +172,6 @@ post "/comment" do
   user_id = session[:user_id]
   halt "Empty comment" if params[:content].to_s.strip == ""
 
-  db.execute("INSERT INTO comments (picture_id, user_id, content) VALUES (?,?,?)", [pic_id, user_id, content])
-
+  create_comment(pic_id, user_id, content)
   redirect('/PictureHold/home')
 end 
