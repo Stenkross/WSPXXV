@@ -33,8 +33,7 @@ def create_tables(db)
   db.execute('CREATE TABLE usertabell (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
               username TEXT NOT NULL UNIQUE,
-              pwd_digest TEXT NOT NULL,
-              login_attempt text)')
+              pwd_digest TEXT NOT NULL)')
 
   db.execute('CREATE TABLE category (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
