@@ -65,17 +65,44 @@ module Model
   # @param [String] password, Användarens givna lösenord
   #
   # @return [Integer] om användarnamnet och lösernodet stämmer retuneras användarens id
+  # @return [String] "sparrad" om användaren har gissat fel för många gånger
   # @return [nil] om inget stämmer överens
   def autenicate(username, password)
-    result = db.execute("SELECT id, pwd_digest FROM usertabell WHERE username=?",username)
+    
+    result = db.execute("SELECT id, pwd_digest, login_attempt FROM usertabell WHERE username=?",username)
+
     if result.empty?
       return nil
     end 
+
     used_id = result.first["id"]
     pwd_digest = result.first["pwd_digest"]
+
+    text = attempts_str.split(',')
+    attempts = []                       
+
+    text.each do |text|
+      attempts << text.to_i
+    end
+
+    if attempts.length >= 3
+      time_skillnad = attempts.last - attempts[-3]
+      time_senaste = Time.now.to_i - attempts.last
+      if time_skillnad < 10 && time_senaste < 15
+        return "sparrad"
+      end 
+    end 
+    
+
     if BCrypt::Password.new(pwd_digest) == password
+      db.execute("UPDATE usertabell SET login_attempt = '' WHERE username = ?", username)
       return used_id 
     else
+      attempt << Time.now.strftime("%s")
+      attempt = attempt.last(3)
+      combined_attempts = attempts.join(',')
+
+      db.execute("UPDATE usertabell SET login_attempt = ? WHERE username = ?", [combined_attempts, username])
       return nil
     end
   end 

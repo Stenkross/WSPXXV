@@ -142,8 +142,9 @@ post '/login' do
   password = params["password"]
 
   user_id = authenticate(username, password)
-
-  if user_id
+  if user_id == "sparrad"
+    halt "Du har testat för många gånger du måste vänta"
+  elsif user_id
     session[:user_id] = user_id
     redirect('/PictureHold/home')
   else

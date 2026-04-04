@@ -28,6 +28,7 @@ def create_tables(db)
               kat_lag TEXT,
               user_id INTEGER,
               location TEXT,
+              login_attempt TEXT
               )')
 
   db.execute('CREATE TABLE usertabell (
