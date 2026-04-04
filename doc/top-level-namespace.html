@@ -75,7 +75,7 @@
   
   <dl>
       <dt>Includes:</dt>
-      <dd><span class='object_link'><a href="Model.html" title="Model (module)">Model</a></span></dd>
+      <dd>Model</dd>
   </dl>
   
   
@@ -85,32 +85,6 @@
   
 </div>
 
-<h2>Defined Under Namespace</h2>
-<p class="children">
-  
-    
-      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Model.html" title="Model (module)">Model</a></span>
-    
-  
-    
-  
-</p>
-
-  
-    <h2>
-      Constant Summary
-      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
-    </h2>
-
-    <dl class="constants">
-      
-        <dt id="DB_PATH-constant" class="">DB_PATH =
-          
-        </dt>
-        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>db/databas.db</span><span class='tstring_end'>&quot;</span></span></pre></dd>
-      
-    </dl>
-  
 
 
 
@@ -143,7 +117,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Loggar användaren ut genom att rensa session.</p>
+</div></span>
   
 </li>
 
@@ -165,7 +141,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Skickar användaren till sidan där man kan redigera en specifik bild.</p>
+</div></span>
   
 </li>
 
@@ -187,7 +165,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Skickar användaren till en sida där man kan skapa konton.</p>
+</div></span>
   
 </li>
 
@@ -209,7 +189,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Skickar användaren till en sida där man kan logga in.</p>
+</div></span>
   
 </li>
 
@@ -231,7 +213,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Skickar användaren till startsidan på hemsidan där bilderna visas.</p>
+</div></span>
   
 </li>
 
@@ -253,7 +237,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Skickar användaren till sidan där man laddar upp bilder.</p>
+</div></span>
   
 </li>
 
@@ -275,7 +261,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Modifierar vilka bilder man ser på index sidan.</p>
+</div></span>
   
 </li>
 
@@ -297,7 +285,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Uppdaterar databasen med en ny kommentar.</p>
+</div></span>
   
 </li>
 
@@ -319,7 +309,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Verifierar inloggninen från användaren.</p>
+</div></span>
   
 </li>
 
@@ -341,7 +333,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Tar bort den anginvna bilden från databasen.</p>
+</div></span>
   
 </li>
 
@@ -363,7 +357,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Tar bort en angiven kommentar från databasen.</p>
+</div></span>
   
 </li>
 
@@ -385,7 +381,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Uppdaterar den befintliga informationen kring en bild och dess kategori.</p>
+</div></span>
   
 </li>
 
@@ -407,7 +405,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Uppdaterar databasen med en ny bild och dess anhörande information.</p>
+</div></span>
   
 </li>
 
@@ -429,7 +429,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Skapar en ny användare i databasen.</p>
+</div></span>
   
 </li>
 
@@ -452,7 +454,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>before do  if <a href=":login_attempt">session</a> == nil    <a href=":login_attempt">session</a> = []  end  end.</p>
+<p>Skyddar de routes som behöver inloggning.</p>
 </div></span>
   
 </li>
@@ -463,16 +465,6 @@
 
 
   
-  
-  
-  
-  
-  
-  
-  
-  <h3 class="inherited">Methods included from <span class='object_link'><a href="Model.html" title="Model (module)">Model</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Model.html#autenicate-instance_method" title="Model#autenicate (method)">#autenicate</a></span>, <span class='object_link'><a href="Model.html#create_comment-instance_method" title="Model#create_comment (method)">#create_comment</a></span>, <span class='object_link'><a href="Model.html#create_picture-instance_method" title="Model#create_picture (method)">#create_picture</a></span>, <span class='object_link'><a href="Model.html#create_user-instance_method" title="Model#create_user (method)">#create_user</a></span>, <span class='object_link'><a href="Model.html#db-instance_method" title="Model#db (method)">#db</a></span>, <span class='object_link'><a href="Model.html#delete_comment-instance_method" title="Model#delete_comment (method)">#delete_comment</a></span>, <span class='object_link'><a href="Model.html#delete_picture-instance_method" title="Model#delete_picture (method)">#delete_picture</a></span>, <span class='object_link'><a href="Model.html#get_all_pics-instance_method" title="Model#get_all_pics (method)">#get_all_pics</a></span>, <span class='object_link'><a href="Model.html#get_pic_id-instance_method" title="Model#get_pic_id (method)">#get_pic_id</a></span>, <span class='object_link'><a href="Model.html#get_user_id-instance_method" title="Model#get_user_id (method)">#get_user_id</a></span>, <span class='object_link'><a href="Model.html#groupe_comments-instance_method" title="Model#groupe_comments (method)">#groupe_comments</a></span>, <span class='object_link'><a href="Model.html#search_pic-instance_method" title="Model#search_pic (method)">#search_pic</a></span>, <span class='object_link'><a href="Model.html#update_picture-instance_method" title="Model#update_picture (method)">#update_picture</a></span>, <span class='object_link'><a href="Model.html#user_exist_already-instance_method" title="Model#user_exist_already (method)">#user_exist_already</a></span></p>
-
 
   <div id="instance_method_details" class="method_details_list">
     <h2>Instance Method Details</h2>
@@ -487,19 +479,32 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Loggar användaren ut genom att rensa session. Skickar sedan användaren till inloggningssidan.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-73
-74
-75
-76</pre>
+98
+99
+100
+101</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app.rb', line 73</span>
+      <pre class="code"><span class="info file"># File 'app.rb', line 98</span>
 
 <span class='id identifier rubyid_get'>get</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/logout</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>do</span>
   <span class='id identifier rubyid_session'>session</span><span class='period'>.</span><span class='id identifier rubyid_clear'>clear</span>
@@ -519,29 +524,69 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Skickar användaren till sidan där man kan redigera en specifik bild. För att använda sidan kräver det att man är inloggad eller att man är en admin (user_id = 1).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>:id,</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Bildens id hämtas från URL:en</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li>Model#get_pic_id</li>
+    
+  </ul>
+
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59</pre>
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app.rb', line 50</span>
+      <pre class="code"><span class="info file"># File 'app.rb', line 66</span>
 
 <span class='id identifier rubyid_get'>get</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/PictureHold/:id/edit</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>do</span>
   <span class='id identifier rubyid_id'>id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span>
-  <span class='ivar'>@selected_pic</span> <span class='op'>=</span> <span class='id identifier rubyid_get_pic_id'><span class='object_link'><a href="Model.html#get_pic_id-instance_method" title="Model#get_pic_id (method)">get_pic_id</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+  <span class='ivar'>@selected_pic</span> <span class='op'>=</span> <span class='id identifier rubyid_get_pic_id'>get_pic_id</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
 
   <span class='kw'>if</span> <span class='ivar'>@user</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>id</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>!=</span> <span class='int'>1</span>
     <span class='id identifier rubyid_halt'>halt</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No access</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='ivar'>@selected_pic</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user_id</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='ivar'>@user</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>id</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
@@ -563,18 +608,31 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Skickar användaren till en sida där man kan skapa konton.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-42
-43
-44</pre>
+51
+52
+53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'app.rb', line 51</span>
 
 <span class='id identifier rubyid_get'>get</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/PictureHold/account/create</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>do</span>
   <span class='id identifier rubyid_slim'>slim</span><span class='lparen'>(</span><span class='symbol'>:create</span><span class='rparen'>)</span>
@@ -593,18 +651,31 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Skickar användaren till en sida där man kan logga in.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-46
-47
-48</pre>
+56
+57
+58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'app.rb', line 56</span>
 
 <span class='id identifier rubyid_get'>get</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/PictureHold/account/login</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>do</span>
   <span class='id identifier rubyid_slim'>slim</span><span class='lparen'>(</span><span class='symbol'>:login</span><span class='rparen'>)</span>
@@ -623,26 +694,48 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Skickar användaren till startsidan på hemsidan där bilderna visas.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li>Model#get_all_pics</li>
+    
+      <li>Model#groupe_comments</li>
+    
+  </ul>
+
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-30
-31
-32
-33
 34
-35</pre>
+35
+36
+37
+38
+39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'app.rb', line 34</span>
 
 <span class='id identifier rubyid_get'>get</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/PictureHold/home</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>do</span>
   <span class='ivar'>@home</span> <span class='op'>=</span> <span class='kw'>true</span>
-  <span class='ivar'>@pictures</span> <span class='op'>=</span> <span class='id identifier rubyid_get_all_pics'><span class='object_link'><a href="Model.html#get_all_pics-instance_method" title="Model#get_all_pics (method)">get_all_pics</a></span></span>
-  <span class='ivar'>@comments</span> <span class='op'>=</span> <span class='id identifier rubyid_groupe_comments'><span class='object_link'><a href="Model.html#groupe_comments-instance_method" title="Model#groupe_comments (method)">groupe_comments</a></span></span>
+  <span class='ivar'>@pictures</span> <span class='op'>=</span> <span class='id identifier rubyid_get_all_pics'>get_all_pics</span>
+  <span class='ivar'>@comments</span> <span class='op'>=</span> <span class='id identifier rubyid_groupe_comments'>groupe_comments</span>
   <span class='id identifier rubyid_slim'>slim</span><span class='lparen'>(</span><span class='symbol'>:index</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -659,19 +752,39 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Skickar användaren till sidan där man laddar upp bilder. För att använda sidan kräver det att man är inloggad.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#re_login-instance_method" title="#re_login (method)">#re_login</a></span></li>
+    
+  </ul>
+
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-37
-38
-39
-40</pre>
+45
+46
+47
+48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'app.rb', line 45</span>
 
 <span class='id identifier rubyid_get'>get</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/PictureHold/upload</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>do</span>
   <span class='id identifier rubyid_re_login'><span class='object_link'><a href="#re_login-instance_method" title="#re_login (method)">re_login</a></span></span>
@@ -691,34 +804,92 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Modifierar vilka bilder man ser på index sidan.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>q,</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Sökordet från användaren (blir tomt om inget skrivs)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>kategori,</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Den valda kategorin att filtrera på</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li>Model#search_pic</li>
+    
+      <li>Model#groupe_comments</li>
+    
+  </ul>
+
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71</pre>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app.rb', line 61</span>
+      <pre class="code"><span class="info file"># File 'app.rb', line 84</span>
 
 <span class='id identifier rubyid_get'>get</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/search</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>do</span>
   <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:q</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_category'>category</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:kategori</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
 
-  <span class='ivar'>@pictures</span> <span class='op'>=</span> <span class='id identifier rubyid_search_pic'><span class='object_link'><a href="Model.html#search_pic-instance_method" title="Model#search_pic (method)">search_pic</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_query'>query</span><span class='comma'>,</span> <span class='id identifier rubyid_category'>category</span><span class='rparen'>)</span>
+  <span class='ivar'>@pictures</span> <span class='op'>=</span> <span class='id identifier rubyid_search_pic'>search_pic</span><span class='lparen'>(</span><span class='id identifier rubyid_query'>query</span><span class='comma'>,</span> <span class='id identifier rubyid_category'>category</span><span class='rparen'>)</span>
 
-  <span class='ivar'>@comments</span> <span class='op'>=</span> <span class='id identifier rubyid_groupe_comments'><span class='object_link'><a href="Model.html#groupe_comments-instance_method" title="Model#groupe_comments (method)">groupe_comments</a></span></span>
+  <span class='ivar'>@comments</span> <span class='op'>=</span> <span class='id identifier rubyid_groupe_comments'>groupe_comments</span>
 
   <span class='ivar'>@home</span> <span class='op'>=</span> <span class='kw'>true</span>
   <span class='id identifier rubyid_slim'>slim</span><span class='lparen'>(</span><span class='symbol'>:index</span><span class='rparen'>)</span>
@@ -737,25 +908,99 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Uppdaterar databasen med en ny kommentar. Kräver att användaren är inloggad, och personen har skrivit en kommentar. Om följande krav godkänns kommer användaren omdirigeras till startsidan.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>picture_id,</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Den tillhörande bildens id.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>content,</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Kommentarens text.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_id,</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Den kommenterande användarens id.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#re_login-instance_method" title="#re_login (method)">#re_login</a></span></li>
+    
+      <li>Model#create_comment</li>
+    
+  </ul>
+
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179</pre>
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app.rb', line 170</span>
+      <pre class="code"><span class="info file"># File 'app.rb', line 259</span>
 
 <span class='id identifier rubyid_post'>post</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/comment</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> 
   <span class='id identifier rubyid_re_login'><span class='object_link'><a href="#re_login-instance_method" title="#re_login (method)">re_login</a></span></span>
@@ -764,7 +1009,7 @@
   <span class='id identifier rubyid_user_id'>user_id</span> <span class='op'>=</span> <span class='id identifier rubyid_session'>session</span><span class='lbracket'>[</span><span class='symbol'>:user_id</span><span class='rbracket'>]</span>
   <span class='id identifier rubyid_halt'>halt</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Empty comment</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:content</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_strip'>strip</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
 
-  <span class='id identifier rubyid_create_comment'><span class='object_link'><a href="Model.html#create_comment-instance_method" title="Model#create_comment (method)">create_comment</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_pic_id'>pic_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='id identifier rubyid_content'>content</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_create_comment'>create_comment</span><span class='lparen'>(</span><span class='id identifier rubyid_pic_id'>pic_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='id identifier rubyid_content'>content</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_redirect'>redirect</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/PictureHold/home</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -781,28 +1026,84 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Verifierar inloggninen från användaren. Om uppgifterna från formuläret stämmer överens sparas användarens id i sessionen och omdirigeras till startsidan.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>username,</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Användarnamnet som användaren har skrivit in i formuläret</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>password,</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Lösenordet från formuläret</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li>Model#authenticate</li>
+    
+  </ul>
+
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110</pre>
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app.rb', line 98</span>
+      <pre class="code"><span class="info file"># File 'app.rb', line 140</span>
 
 <span class='id identifier rubyid_post'>post</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/login</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>do</span>
   <span class='id identifier rubyid_username'>username</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>username</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
@@ -831,36 +1132,80 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Tar bort den anginvna bilden från databasen. Kollar om personen som tar bort är den som äger bilden eller om det är en admin. Om föregånde krav går igenom omdirigeras användaren till startsidan.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>:id,</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Bildens id hämtas från URL:en</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#re_login-instance_method" title="#re_login (method)">#re_login</a></span></li>
+    
+      <li>Model#delete_picture</li>
+    
+      <li>Model#get_pic_id</li>
+    
+  </ul>
+
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122</pre>
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app.rb', line 112</span>
+      <pre class="code"><span class="info file"># File 'app.rb', line 163</span>
 
 <span class='id identifier rubyid_post'>post</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/PictureHold/:id/delete</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>do</span>
   <span class='id identifier rubyid_re_login'><span class='object_link'><a href="#re_login-instance_method" title="#re_login (method)">re_login</a></span></span>
   <span class='id identifier rubyid_id'>id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span>
-  <span class='id identifier rubyid_picture'>picture</span> <span class='op'>=</span> <span class='id identifier rubyid_get_pic_id'><span class='object_link'><a href="Model.html#get_pic_id-instance_method" title="Model#get_pic_id (method)">get_pic_id</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_picture'>picture</span> <span class='op'>=</span> <span class='id identifier rubyid_get_pic_id'>get_pic_id</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
 
   <span class='kw'>if</span> <span class='ivar'>@user</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>id</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>!=</span> <span class='int'>1</span>
     <span class='id identifier rubyid_halt'>halt</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No access</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_picture'>picture</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user_id</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='ivar'>@user</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>id</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
   <span class='kw'>end</span>
-  <span class='id identifier rubyid_delete_picture'><span class='object_link'><a href="Model.html#delete_picture-instance_method" title="Model#delete_picture (method)">delete_picture</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_delete_picture'>delete_picture</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_redirect'>redirect</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/PictureHold/home</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -877,30 +1222,70 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Tar bort en angiven kommentar från databasen. Kollar om det är en admin. Om föregående krav stämmer omderigeras användaren till startsidan.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>:id,</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Bildens id hämtas från URL:en</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li>Model#delete_comment</li>
+    
+  </ul>
+
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-124
-125
-126
-127
-128
-129
-130
-131</pre>
+182
+183
+184
+185
+186
+187
+188
+189</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app.rb', line 124</span>
+      <pre class="code"><span class="info file"># File 'app.rb', line 182</span>
 
 <span class='id identifier rubyid_post'>post</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/PictureHold/:id/delete_com</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>do</span>
   <span class='kw'>if</span> <span class='ivar'>@user</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>id</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>!=</span> <span class='int'>1</span>
     <span class='id identifier rubyid_halt'>halt</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No access</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>end</span>
   
-  <span class='id identifier rubyid_delete_comment'><span class='object_link'><a href="Model.html#delete_comment-instance_method" title="Model#delete_comment (method)">delete_comment</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_delete_comment'>delete_comment</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_redirect'>redirect</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/PictureHold/home</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -917,28 +1302,118 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Uppdaterar den befintliga informationen kring en bild och dess kategori. Kräver att användaren är inloggad. Efter uppdatering omdirigeras användaren till startsidan.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>:id,</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Bildens id hämtas från URL:en</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>namez,</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Det nya namnet på bilden från formuläret</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>kat-lage,</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Den nya kategorin från formuläret</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>categories,</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>En lista med valda kategorier från formuläret som blir en tom lista om ingenting väljs</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#re_login-instance_method" title="#re_login (method)">#re_login</a></span></li>
+    
+      <li>Model#delete_comment</li>
+    
+  </ul>
+
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145</pre>
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app.rb', line 133</span>
+      <pre class="code"><span class="info file"># File 'app.rb', line 201</span>
 
 <span class='id identifier rubyid_post'>post</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/PictureHold/:id/update</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>do</span>
   <span class='id identifier rubyid_re_login'><span class='object_link'><a href="#re_login-instance_method" title="#re_login (method)">re_login</a></span></span>
@@ -949,7 +1424,7 @@
   
   <span class='id identifier rubyid_new_categories'>new_categories</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>categories</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 
-  <span class='id identifier rubyid_update_picture'><span class='object_link'><a href="Model.html#update_picture-instance_method" title="Model#update_picture (method)">update_picture</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_pic_id'>pic_id</span><span class='comma'>,</span> <span class='id identifier rubyid_new_name'>new_name</span><span class='comma'>,</span> <span class='id identifier rubyid_new_kat_lag'>new_kat_lag</span><span class='comma'>,</span> <span class='id identifier rubyid_new_categories'>new_categories</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_update_picture'>update_picture</span><span class='lparen'>(</span><span class='id identifier rubyid_pic_id'>pic_id</span><span class='comma'>,</span> <span class='id identifier rubyid_new_name'>new_name</span><span class='comma'>,</span> <span class='id identifier rubyid_new_kat_lag'>new_kat_lag</span><span class='comma'>,</span> <span class='id identifier rubyid_new_categories'>new_categories</span><span class='rparen'>)</span>
   
   <span class='id identifier rubyid_redirect'>redirect</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/PictureHold/home</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
@@ -967,37 +1442,127 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Uppdaterar databasen med en ny bild och dess anhörande information. Kräver att användaren är inloggad, skriver ett namn och laddar upp en bild. Om följade krav är godkända omdirigeras användaren tillstartsidan.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>namez,</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Namnet på bilden från formuläret</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>kat-lage,</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Kategorin för bilden från formuläret</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>picture,</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Själva filuppladdningen från formuläret (innehåller tempfile och filename)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>categories,</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>En lista med valda kategorier från formuläret kan bli tom</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#re_login-instance_method" title="#re_login (method)">#re_login</a></span></li>
+    
+      <li>Model#create_picture</li>
+    
+  </ul>
+
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168</pre>
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app.rb', line 147</span>
+      <pre class="code"><span class="info file"># File 'app.rb', line 226</span>
 
 <span class='id identifier rubyid_post'>post</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/PictureHold/upload</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>do</span>
   <span class='id identifier rubyid_re_login'><span class='object_link'><a href="#re_login-instance_method" title="#re_login (method)">re_login</a></span></span>
@@ -1018,7 +1583,7 @@
     <span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_write'>write</span><span class='lparen'>(</span><span class='id identifier rubyid_tempfile'>tempfile</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
-  <span class='id identifier rubyid_create_picture'><span class='object_link'><a href="Model.html#create_picture-instance_method" title="Model#create_picture (method)">create_picture</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_up_name'>up_name</span><span class='comma'>,</span> <span class='id identifier rubyid_up_kat_lag'>up_kat_lag</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='id identifier rubyid_categories'>categories</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_create_picture'>create_picture</span><span class='lparen'>(</span><span class='id identifier rubyid_up_name'>up_name</span><span class='comma'>,</span> <span class='id identifier rubyid_up_kat_lag'>up_kat_lag</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='id identifier rubyid_categories'>categories</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_redirect'>redirect</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/PictureHold/home</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1035,34 +1600,108 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Skapar en ny användare i databasen. Kontrolerar att fälten inte är tomma och att användarnamnent inte redan finns och att lösenorden matchar. Användaren skickas sedan tillbaka till startsidan om de kraven uppfylls.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>username,</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Användarnamnet som användaren har skrivit in i formuläret</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>password,</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Lösenordet från formuläret</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>confirm_password,</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Det konfermerade lösenordet från formuläret</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li>Model#user_exist_already</li>
+    
+      <li>Model#create_user</li>
+    
+  </ul>
+
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96</pre>
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'app.rb', line 113</span>
 
 <span class='id identifier rubyid_post'>post</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/register</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>do</span>
   <span class='id identifier rubyid_username'>username</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>username</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
@@ -1071,9 +1710,9 @@
 
   <span class='id identifier rubyid_halt'>halt</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Tomma fält</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_username'>username</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_strip'>strip</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span> <span class='op'>||</span> <span class='id identifier rubyid_password'>password</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_strip'>strip</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
   
-  <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_user_exist_already'><span class='object_link'><a href="Model.html#user_exist_already-instance_method" title="Model#user_exist_already (method)">user_exist_already</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_username'>username</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_user_exist_already'>user_exist_already</span><span class='lparen'>(</span><span class='id identifier rubyid_username'>username</span><span class='rparen'>)</span>
     <span class='kw'>if</span> <span class='id identifier rubyid_password'>password</span> <span class='op'>==</span> <span class='id identifier rubyid_password_confirm'>password_confirm</span>
-      <span class='id identifier rubyid_create_user'><span class='object_link'><a href="Model.html#create_user-instance_method" title="Model#create_user (method)">create_user</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_username'>username</span><span class='comma'>,</span> <span class='id identifier rubyid_password'>password</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_create_user'>create_user</span><span class='lparen'>(</span><span class='id identifier rubyid_username'>username</span><span class='comma'>,</span> <span class='id identifier rubyid_password'>password</span><span class='rparen'>)</span>
       <span class='id identifier rubyid_redirect'>redirect</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/PictureHold/home</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
     <span class='kw'>else</span>
       <span class='id identifier rubyid_halt'>halt</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Lösenorden matchar inte</span><span class='tstring_end'>&quot;</span></span>
@@ -1100,14 +1739,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>before do</p>
-
-<pre class="code ruby"><code class="ruby"><span class='kw'>if</span> <span class='id identifier rubyid_session'>session</span><span class='lbracket'>[</span><span class='symbol'>:login_attempt</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='kw'>nil</span>
-  <span class='id identifier rubyid_session'>session</span><span class='lbracket'>[</span><span class='symbol'>:login_attempt</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-<span class='kw'>end</span>
-</code></pre>
-
-<p>end</p>
+<p>Skyddar de routes som behöver inloggning. Om anändaren inte är inloggad kommer @user = nil vilket avbryter koden och skickar användaren till login.</p>
 
 
   </div>
@@ -1143,7 +1775,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Apr  4 10:25:37 2026 by
+  Generated on Sat Apr  4 12:36:39 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.3.5).
 </div>

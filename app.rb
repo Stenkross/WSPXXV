@@ -13,7 +13,6 @@ include Model
 # Kollar om användaren är inloggad i sessionen och returnerar all dens data från databasen.
 # 
 # @see Model#get_user_id
-
 before do
   if session[:user_id]
     @user = get_user_id(session[:user_id])
@@ -24,7 +23,6 @@ end
 
 # Skyddar de routes som behöver inloggning.
 # Om anändaren inte är inloggad kommer @user = nil vilket avbryter koden och skickar användaren till login.
-
 def re_login
   halt redirect('/PictureHold/account/login') unless @user
 end
@@ -33,7 +31,6 @@ end
 #
 # @see Model#get_all_pics
 # @see Model#groupe_comments
-
 get '/PictureHold/home' do
   @home = true
   @pictures = get_all_pics
@@ -45,20 +42,17 @@ end
 # För att använda sidan kräver det att man är inloggad.
 #
 # @see re_login
-
 get '/PictureHold/upload' do
   re_login
   slim(:upload)
 end 
 
 # Skickar användaren till en sida där man kan skapa konton.
-
 get '/PictureHold/account/create' do
   slim(:create)
 end
 
 # Skickar användaren till en sida där man kan logga in.
-
 get '/PictureHold/account/login' do
   slim(:login)
 end 
@@ -69,7 +63,6 @@ end
 # @param [Integer] :id, Bildens id hämtas från URL:en
 #
 # @see Model#get_pic_id
-
 get '/PictureHold/:id/edit' do
   id = params[:id]
   @selected_pic = get_pic_id(id)
@@ -83,9 +76,11 @@ end
 
 # Modifierar vilka bilder man ser på index sidan.
 #
+# @param [String] q, Sökordet från användaren (blir tomt om inget skrivs)
+# @param [String] kategori, Den valda kategorin att filtrera på
+#
 # @see Model#search_pic
 # @see Model#groupe_comments
-
 get '/search' do
   query = params[:q] || ""
   category = params[:kategori] || ""
@@ -100,7 +95,6 @@ end
 
 # Loggar användaren ut genom att rensa session.
 # Skickar sedan användaren till inloggningssidan.
-
 get '/logout' do
   session.clear
   redirect '/PictureHold/account/login'
@@ -116,7 +110,6 @@ end
 #
 # @see Model#user_exist_already
 # @see Model#create_user
-
 post '/register' do
   username = params["username"]
   password = params["password"]
@@ -144,7 +137,6 @@ end
 # @param [String] password, Lösenordet från formuläret
 #
 # @see Model#authenticate
-
 post '/login' do
   username = params["username"]
   password = params["password"]
@@ -168,7 +160,6 @@ end
 # @see re_login
 # @see Model#delete_picture
 # @see Model#get_pic_id
-
 post '/PictureHold/:id/delete' do
   re_login
   id = params[:id]
@@ -188,7 +179,6 @@ end
 # @param [Integer] :id, Bildens id hämtas från URL:en
 #
 # @see Model#delete_comment
-
 post '/PictureHold/:id/delete_com' do
   if @user["id"] != 1
     halt "No access"
@@ -208,7 +198,6 @@ end
 #
 # @see re_login
 # @see Model#delete_comment
-
 post '/PictureHold/:id/update' do
   re_login
   
@@ -234,7 +223,6 @@ end
 #
 # @see re_login
 # @see Model#create_picture
-
 post '/PictureHold/upload' do
   re_login
   halt "Tomt namn" if params[:namez].to_s.strip == ""
@@ -268,7 +256,6 @@ end
 #
 # @see re_login
 # @see Model#create_comment
-
 post "/comment" do 
   re_login
   pic_id = params[:picture_id]

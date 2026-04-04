@@ -4,6 +4,11 @@ require 'bcrypt'
 DB_PATH = "db/databas.db"
 
 module Model
+
+  # Skapar och retunerar en anslutning till databasen.
+  # Om en anslutning finns redan återanvänds den.
+  #
+  # @return [SQLite3::Database], Den aktiva databasobjektet
   def db
     return @db if @db
 
@@ -15,23 +20,52 @@ module Model
     return @db
   end
 
+  # Hämtar all information om en specifik användare från databasen.
+  #
+  # @param [Integer] id Användarens unika ID-nummer
+  #
+  # @return [Hash] En hash som innehåller användarens data
+  # @return [nil] om ingen användare hittades
+
   def get_user_id(id)
     db.execute("SELECT * FROM usertabell WHERE id=?", [id]).first
   end 
 
+  # Hämtar all information om en specifik bild från databasen.
+  #
+  # @param [Integer] id Bildens unika ID-nummer
+  #
+  # @return [Hash] En hash som innehåller bildens data
+  # @return [nil] om ingen bild hittades
   def get_pic_id(id)
     db.execute("SELECT * FROM pictures WHERE id = ?", [id]).first
   end 
 
+  # Hämtar all information om alla bilder.
+  #
+  # @return [Hash] En hash som innehåller bildernas data
+  # @return [nil] om inga bilder hittas
   def get_all_pics
     db.execute("SELECT * FROM pictures")
   end 
 
+  # Kollar med databasen om användarnamnent redan finns.
+  #
+  # @param [String] username, Användarens önskade användarnamn
+  #
+  # @return [Boolean] true om namnet redan finns, false om namnet är ledigt
   def user_exist_already(username)
     result = db.execute("SELECT id FROM usertabell WHERE username=?", [username])
     return !result.empty?
   end
 
+  # Kollar om lösernordet och användarnamnet matchar med databasen.
+  #
+  # @param [String] username, Användarens givna användarnamn
+  # @param [String] password, Användarens givna lösenord
+  #
+  # @return [Integer] om användarnamnet och lösernodet stämmer retuneras användarens id
+  # @return [nil] om inget stämmer överens
   def autenicate(username, password)
     result = db.execute("SELECT id, pwd_digest FROM usertabell WHERE username=?",username)
     if result.empty?
@@ -46,14 +80,38 @@ module Model
     end
   end 
 
+  # Skapar en användare i databasen (usertabell).
+  #
+  # @param [String] username, Användarens önskade användarnamn
+  # @param [String] password, Användarens önskade lösenord
+  #
+  # @return [void]
   def create_user(username, password)
     password_digest = BCrypt::Password.create(password)
     db.execute("INSERT INTO usertabell(username, pwd_digest) VALUES (?,?)", [username, password_digest])
   end
+
+  # Skapar en kommentar i databasen (comments).
+  #
+  # @param [Integer] pic_id Bildens id
+  # @param [Integer] user_id Kommentatorns id
+  # @param [String] content Kommentarens text
+  #
+  # @return [void]
   def create_comment(pic_id, user_id, content)
     db.execute("INSERT INTO comments (picture_id, user_id, content) VALUES (?,?,?)", [pic_id, user_id, content])
   end 
 
+  # Skapar en bild i databasen (pictures) med des tillhörande information.
+  # Hanterar även kopplingen av kategorier till den nya bilden.
+  #
+  # @param [String] name Bildens namn
+  # @param [String] kat_lag Bildens kategori
+  # @param [Integer] user_id Uppladdarens id
+  # @param [String] filename Namnet på filen som sparats
+  # @param [Array<String>] categories En lista med kategorier som bilden ska kopplas till
+  #
+  # @return [void]
   def create_picture(name, kat_lag, user_id, filename, categories)
     db.execute("INSERT INTO pictures (name, kat_lag, user_id, location) VALUES (?,?,?,?)", [name, kat_lag, user_id, "/uploaded_pictures/#{filename}"])
 
@@ -72,6 +130,15 @@ module Model
     end
   end
 
+  # Uppdaterar den angivna bildens information i databasen (pictures).
+  # Hanterar även borttagning av gamla kategorikopplingar.
+  #
+  # @param [Integer] pic_id Bildens id
+  # @param [String] new_name Bildens nya namn
+  # @param [String] new_kat_lag Bildens nya läge
+  # @param [Array<String>] new_categories En lista med bildens nya kategorier
+  #
+  # @return [void]
   def update_picture(pic_id, new_name, new_kat_lag, new_categories)
     db.execute("UPDATE pictures SET name = ?, kat_lag = ? WHERE id = ?", [new_name, new_kat_lag, pic_id])
 
@@ -91,6 +158,10 @@ module Model
     end
   end 
 
+  # Hämtar kommentarerna och deras tillhörande ägare från databasen.
+  # Grupperar sedan dessa utefter bilder.
+  #
+  # @return [Hash] En hash där nyckeln är bildens id och värdet är en lista med bildens kommentarer
   def groupe_comments
     db.execute(<<-SQL).group_by { |c| c["picture_id"] }
        SELECT comments.*, usertabell.username
@@ -99,14 +170,31 @@ module Model
      SQL
   end 
 
+  # Tar bort en bild från databasen (pictures).
+  #
+  # @param [Integer] id, Bildens id
+  #
+  # @return [void]
   def delete_picture(id)
     db.execute("DELETE from pictures WHERE id=?", [id])
   end 
 
+  # Tar bort en kommentar från databasen (comments).
+  #
+  # @param [Integer] id, kommentarens id
+  #
+  # @return [void]
   def delete_comment(id)
     db.execute("DELETE from comments WHERE id=?", [id])
   end 
 
+  # Söker i databasen efter bilder baserat på användarens inskrivna text och kategori.
+  # Om en kategori är vald filtreras sökningen på den annars söker den enbart på namnet.
+  #
+  # @param [String] query Sökordet för att hitta bilder med matchande namn
+  # @param [String] category Den valda kategorin att filtrera på
+  #
+  # @return [Array<Hash>] En lista med de bilder som matchar sökningen
   def search_pic(query, category)
     if category != ""
      sql = "
