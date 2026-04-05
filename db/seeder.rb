@@ -27,14 +27,14 @@ def create_tables(db)
               name TEXT NOT NULL, 
               kat_lag TEXT,
               user_id INTEGER,
-              location TEXT,
-              login_attempt TEXT
+              location TEXT
               )')
 
   db.execute('CREATE TABLE usertabell (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
               username TEXT NOT NULL UNIQUE,
-              pwd_digest TEXT NOT NULL)')
+              pwd_digest TEXT NOT NULL,
+              login_attempt TEXT)')
 
   db.execute('CREATE TABLE category (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -59,7 +59,7 @@ def populate_tables(db)
   db.execute('INSERT INTO pictures (name, kat_lag, user_id, location) VALUES ("Tredje foto", "Offentlig", 1, "/uploaded_pictures/20240124_121326.jpg")')
   db.execute('INSERT INTO pictures (name, kat_lag, user_id, location) VALUES ("Fjärde foto", "Offentlig", 1, "/uploaded_pictures/Arabian-dromedary-camel-calf.png")')
 
-  db.execute('INSERT INTO usertabell (username, pwd_digest) VALUES ("Admin", "$2a$12$UrPph/r5xcr6GEm5J6RbfOqGSzLjCZkYw2glpjHFaiq/CfzboD2I6")')
+  db.execute('INSERT INTO usertabell (username, pwd_digest, login_attempt) VALUES ("Admin", "$2a$12$UrPph/r5xcr6GEm5J6RbfOqGSzLjCZkYw2glpjHFaiq/CfzboD2I6", "")')
 
   db.execute('INSERT INTO comments (user_id, picture_id, content) VALUES (1, 1, "Snygg bild jani!")')
 
