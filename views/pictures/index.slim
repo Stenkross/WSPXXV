@@ -10,11 +10,11 @@
 
                 - if @user && pic["user_id"] == @user["id"] || @user["id"] == 1
                     .button-row
-                      form action="/PictureHold/#{pic["id"]}/delete" method="post"
+                      form action="/pictures/#{pic["id"]}" method="post"
+                        input type="hidden" name="_method" value="DELETE"
                         input type="submit" value="Ta bort"
   
-                      form action="/PictureHold/#{pic["id"]}/edit" method="get"
-                        input type="submit" value="Redigera"
+                      a href="/pictures/#{pic["id"]}/edit" Redigera
                 - if pic["kat_lag"] == "Offentlig"
                   details
                     summary Kommentarer
@@ -24,10 +24,11 @@
                           strong = comment["username"]
                           | : #{comment["content"]}
                           - if @user && @user["id"] == 1
-                            form action="/PictureHold/#{comment["id"]}/delete_com" method="post"
+                            form action=action="/comments/#{comment["id"]}" method="post"
+                             input type="hidden" name="_method" value="DELETE"
                              input type="submit" value="Ta bort"
 
-                    form action="/comment" method="post"
+                    form action="/comments" method="post"
                       input type="hidden" name="picture_id" value="#{pic["id"]}"
                       textarea name="content" placeholder="Skriv en kommentar"
                       br

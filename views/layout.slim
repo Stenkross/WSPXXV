@@ -1,45 +1,44 @@
-<!DOCTYPE html>
+doctype html
 html lang="en"
   head
-    meta charset="UTF-8"/
-    meta name="viewport" content="width=device-width, initial-scale=1.0"/
-    link rel="stylesheet" href="/style.css?#{Time.now.to_i}"/
+    meta charset="UTF-8"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    link rel="stylesheet" href="/style.css?#{Time.now.to_i}"
     title PictureHold
-  body 
-
-  #wrapper_1
-    
-    .header-home
+  body
+    #wrapper_1
+      .header-home
         h1 PictureHome
-
         - if @user
-            h2 Logged in as: #{@user["username"]} 
+          h2 Logged in as: #{@user["username"]}
 
-    .sidebar 
+      .sidebar
         ul
+          li
+            a href="/pictures" Home
+          li
+            a href="/pictures/new" Upload
+          li
+            a href="/session/new" Login
+          li
+            a href="/users/new" Create Account
+          hr
+          - if @home
             li
-                a href="/PictureHold/home" Home
+              h4 Sök
+              form action="/pictures/search" method="get"
+                input name="q" placeholder="Vilken Bild?" type="text"
+                select name="kategori" id="kategori"
+                  option value="" Alla
+                  option value="Vardag" Vardag
+                  option value="Semester" Semester
+                  option value="Bröllop" Bröllop
+                  option value="Natur" Natur
+                input type="submit" value="sök"
+          - if @user
             li
-                a href="/PictureHold/upload" Upload
-            li
-                a href="/PictureHold/account/login" Login
-            li
-                a href="/PictureHold/account/create" Create Account
-                hr
-            - if @home
-                li 
-                    h4 Sök
-                    form action="/search" method="get"
-                        input name="q" placeholder="Vilken Bild?" type="text"
-                        select name="kategori" id="kategori"
-                                option value="" Alla
-                                option value="Vardag" Vardag
-                                option value="Semester" Semester
-                                option value="Bröllop" Bröllop
-                                option value="Natur" Natur
-                        input type="submit" value="sök"
-            - if @user
-                li
-                    form action="/logout"
-                        input type="submit" value="logga ut"
-    ==yield
+              form action="/session" method="post"
+                input type="hidden" name="_method" value="DELETE"
+                input type="submit" value="logga ut"
+
+      == yield

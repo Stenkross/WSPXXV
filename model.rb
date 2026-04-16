@@ -173,7 +173,7 @@ module Model
     db.execute("DELETE FROM picture_category WHERE picture_id = ?", pic_id)
 
     new_categories.each do |cat|
-      result = db.execute("SELECT id FROM category WHERE namn=?", cat)
+      result = db.execute("SELECT id FROM category WHERE namn=?", [cat])
 
       if result.empty?
         db.execute("INSERT INTO category (namn) VALUES (?)", cat)

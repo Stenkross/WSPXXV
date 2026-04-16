@@ -1,0 +1,23 @@
+.edit-wrapper
+  .edit-box
+    h2 Uppdatera din bild 
+
+    form action="/pictures/#{@selected_pic['id']}" method="post"
+      input type="hidden" name="_method" value="PATCH"
+
+      label Rubrik
+      input type="text" name="namez" value="#{@selected_pic['name']}"
+
+      label Kategori
+      - ["Vardag", "Semester", "Bröllop", "Natur"].each do |cat|
+        label
+          input type="checkbox" name="categories[]" value=cat
+          = cat
+
+      label Synlighet
+      select name="kat-lage"
+        option value="Offentlig" selected=(@selected_pic["kat_lag"] == "Offentlig") Offentlig
+        option value="Privat" selected=(@selected_pic["kat_lag"] == "Privat") Privat
+
+      br
+      input type="submit" value="Uppdatera"
